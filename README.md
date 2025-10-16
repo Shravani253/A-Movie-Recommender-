@@ -11,4 +11,4 @@ Tech Stack: Python | Pandas | scikit-learn | NLTK | Streamlit | Pickle
 
 The project is ideal for anyone looking to understand real-world recommender systems, NLP for feature extraction, and Python-based interactive applications.
 
-
+**use streamlit run App.py in terminal to run the system**
