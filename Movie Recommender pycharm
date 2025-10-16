@@ -1,0 +1,56 @@
+import pandas as pd
+import streamlit as st
+import pickle
+
+movies_dict = pickle.load(open('Movie_dict.pkl', 'rb'))
+Movies = pd.DataFrame(movies_dict)
+
+poster_dict = pickle.load(open('poster_dict.pkl', 'rb'))
+poster_df = pd.DataFrame(poster_dict)
+
+similarity = pickle.load(open('similarity.pkl', 'rb'))
+
+st.title('Movie Recommender System 🎬')
+
+
+def recommend(movie):
+    recommended_movies = []
+    recommended_posters = []
+
+    if movie not in Movies['title'].values:
+        st.warning("Selected movie not found in database!")
+        return [], []
+
+    movie_index = Movies[Movies['title'] == movie].index[0]
+    distances = similarity[movie_index]
+    movie_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]
+
+    for i in movie_list:
+        movie_name = Movies.iloc[i[0]]['title']
+        poster_row = poster_df[poster_df['title'] == movie_name]
+        poster_url = poster_row['poster'].values[0] if not poster_row.empty else None
+        recommended_movies.append(movie_name)
+        recommended_posters.append(poster_url)
+
+    return recommended_movies, recommended_posters
+
+selected_movie_name = st.selectbox(
+    "Can’t decide what to watch? Type one, get five! 😍",
+    Movies['title'].values
+)
+
+if st.button("Recommend"):
+    names, posters = recommend(selected_movie_name)
+
+    if not names or not posters:
+        st.write("No recommendations found.")
+    else:
+        cols = st.columns(5)
+        for i in range(5):
+            with cols[i]:
+                if posters[i]:
+                    st.image(posters[i], caption=names[i], use_container_width=True)
+                else:
+                    st.write(names[i])
+
+
