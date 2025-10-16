@@ -1,9 +1,14 @@
 # A-Movie-Recommender-
 A Movie Recommender System built with Python and Streamlit that suggests the top 5 movies along with their posters.
 This project demonstrates step-by-step how to build a content-based movie recommender system using Python and NLP techniques, combined with an interactive front-end built in Streamlit. It is organized into two parts: the first focuses on data processing, feature engineering, and building the recommendation model, and the second on developing an interactive user interface for movie exploration.
+
 The first part covers how to extract meaningful features from movie metadata, including genre, keywords, cast, and crew, and how to transform textual data into numerical vectors suitable for similarity computation. Using cosine similarity, the system identifies the top 5 movies most similar to a selected title. The processing pipeline is modular and includes data cleaning, feature extraction using CountVectorizer, stemming with PorterStemmer, and finally saving processed data with Pickle for reuse.
+
 The second part of the project demonstrates how to load the pre-processed files into a Streamlit interface. Users can select a movie from a dropdown, and the application fetches the top recommendations along with their posters. This part emphasizes interactive exploration, handling edge cases where recommendations are unavailable, and providing a user-friendly display of movie titles and poster images.
 While the techniques used in content-based recommender systems are well-known, the goal of this project is to show how to create a complete, end-to-end system that is ready for potential deployment, from backend model construction to a working front-end interface.
+
+Tech Stack: Python | Pandas | scikit-learn | NLTK | Streamlit | Pickle
+
 The project is ideal for anyone looking to understand real-world recommender systems, NLP for feature extraction, and Python-based interactive applications.
 
 
